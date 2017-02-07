@@ -1,0 +1,16 @@
+{
+	"root": true,
+	"env": {
+		"es6": true,
+		"node": true
+	},
+	"extends": "eslint:recommended",
+	"rules": {
+		"no-console": "off",
+		"no-extend-native": "error",
+		"no-implied-eval": "error",
+		"no-loop-func": "warn",
+		"semi": "warn",
+		"semi-spacing": "warn"
+	}
+}
