@@ -3,11 +3,11 @@
 
 const chalk = require('chalk');
 const childProcess = require('child_process');
+const flatten = require('lodash/flattenDeep');
 const fs = require('fs');
 const minimist = require('minimist');
 const path = require('path');
 const Promise = require('bluebird');
-const _ = require('lodash');
 
 const readDir = Promise.promisify(fs.readdir);
 const fsStat = Promise.promisify(fs.lstat);
@@ -113,7 +113,7 @@ function listfolders(folder) {
 			}
 			return listsubFolders(folder);
 		})
-		.then(folders => _.flattenDeep(folders));
+		.then(folders => flatten(folders));
 }
 
 function logResult(pathname, details, color) {

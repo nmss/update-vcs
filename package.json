@@ -1,6 +1,6 @@
 {
   "name": "update-vcs",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "update.js",
   "bin": "./update.js",
   "engines": {
