@@ -88,8 +88,8 @@ function getVcsInfo(pathname) {
 			const info = {
 				path: pathname,
 				isVcs: false,
-				isGit: files.includes('.git'),
-				isSvn: files.includes('.svn')
+				isGit: files.indexOf('.git') !== -1,
+				isSvn: files.indexOf('.svn') !== -1
 			};
 			info.isVcs = info.isGit || info.isSvn;
 			if (info.isGit) {
