@@ -92,6 +92,16 @@ function getVcsInfo(pathname) {
 				isSvn: files.includes('.svn')
 			};
 			info.isVcs = info.isGit || info.isSvn;
+			if (info.isGit) {
+				return fsStat(path.join(pathname, '.git/svn'))
+					.then(fileInfo => {
+						if (fileInfo.isDirectory()) {
+							info.isGitSvn = true;
+						}
+					})
+					.catch(() => { })
+					.return(info);
+			}
 			return info;
 		});
 }
@@ -123,6 +133,12 @@ function logResult(pathname, details, color) {
 		message.push(details);
 	}
 	log(message.join('\n'));
+}
+
+function gitSvnUpdate(pathname) {
+	return exec('git svn rebase', pathname)
+		.then(stdout => logResult(pathname, stdout.trim(), chalk.green))
+		.catch(err => logResult(pathname, err, chalk.red));
 }
 
 function gitUpdate(pathname) {
@@ -167,6 +183,8 @@ function update(folder) {
 			if (folderInfo.isGit && folderInfo.isSvn) {
 				logResult(folderInfo.path, 'Skipping update: git and svn are together in this folder', chalk.yellow);
 				return;
+			} else if (folderInfo.isGitSvn) {
+				return gitSvnUpdate(folderInfo.path);
 			} else if (folderInfo.isGit) {
 				return gitUpdate(folderInfo.path);
 			} else if (folderInfo.isSvn) {
