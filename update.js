@@ -46,7 +46,7 @@ function parseArgs() {
 function usage() {
 	const basename = path.basename(process.argv[1]);
 	console.log([
-		`Usage: ${basename} [options]`,
+		`Usage: ${basename} [options] [path] [filters...]`,
 		``,
 		`Options:`,
 		`  -h, --help              Display this help text and exit`,
