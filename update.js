@@ -126,9 +126,9 @@ function listfolders(folder) {
 		.then(folders => flatten(folders));
 }
 
-function logResult(pathname, details, color) {
+function logResult(pathname, details, color, verbose = argv.verbose) {
 	const message = [color(pathname)];
-	if (argv.verbose) {
+	if (verbose) {
 		message.unshift('');
 		message.push(details);
 	}
@@ -138,7 +138,7 @@ function logResult(pathname, details, color) {
 function gitSvnUpdate(pathname) {
 	return exec('git svn rebase', pathname)
 		.then(stdout => logResult(pathname, stdout.trim(), chalk.green))
-		.catch(err => logResult(pathname, err, chalk.red));
+		.catch(err => logResult(pathname, err, chalk.red, 1));
 }
 
 function gitUpdate(pathname) {
@@ -154,7 +154,7 @@ function gitUpdate(pathname) {
 			if (err.name === 'noRemote') {
 				logResult(pathname, 'Unable to update: there is no remote', chalk.yellow);
 			} else {
-				logResult(pathname, err, chalk.red);
+				logResult(pathname, err, chalk.red, 1);
 			}
 		});
 }
@@ -162,7 +162,7 @@ function gitUpdate(pathname) {
 function svnUpdate(pathname) {
 	return exec('svn up', pathname)
 		.then(stdout => logResult(pathname, stdout.trim(), chalk.green))
-		.catch(err => logResult(pathname, err, chalk.red));
+		.catch(err => logResult(pathname, err, chalk.red, 1));
 }
 
 function filterList(folder) {
@@ -190,5 +190,8 @@ function update(folder) {
 			} else if (folderInfo.isSvn) {
 				return svnUpdate(folderInfo.path);
 			}
-		}, { concurrency: 5 });
+		}, { concurrency: 5 })
+		.then(() => {
+			process.exit(0)
+		});
 }
