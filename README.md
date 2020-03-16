@@ -2,7 +2,7 @@
 A script that recursively update any git/svn folder
 
 ## compatibility
-At least node 4
+At least node 8
 
 ## Installation
 ```
