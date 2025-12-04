@@ -1,13 +1,11 @@
 #! /usr/bin/env node
-'use strict';
-
-const chalk = require('chalk');
-const childProcess = require('child_process');
-const flatten = require('lodash/flattenDeep');
-const fs = require('fs');
-const minimist = require('minimist');
-const path = require('path');
-const Promise = require('bluebird');
+import chalk from 'chalk';
+import childProcess from 'child_process';
+import flatten from 'lodash/flattenDeep.js';
+import fs from 'fs';
+import minimist from 'minimist';
+import path from 'path';
+import Promise from 'bluebird';
 
 const readDir = Promise.promisify(fs.readdir);
 const fsStat = Promise.promisify(fs.lstat);

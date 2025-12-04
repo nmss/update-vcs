@@ -1,6 +1,8 @@
 {
   "name": "update-vcs",
   "version": "2.0.0",
+  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a",
+  "type": "module",
   "main": "update.js",
   "bin": "./update.js",
   "repository": {
@@ -9,18 +11,18 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=8"
+    "node": ">=22"
   },
   "scripts": {
     "lint": "eslint ."
   },
   "dependencies": {
-    "bluebird": "^3.5.5",
-    "chalk": "^4.1.1",
+    "bluebird": "^3.7.2",
+    "chalk": "^5.6.2",
     "lodash": "^4.17.21",
-    "minimist": "^1.2.6"
+    "minimist": "^1.2.8"
   },
   "devDependencies": {
-    "eslint": "^7.31.0"
+    "eslint": "^8.57.1"
   }
 }
